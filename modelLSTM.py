@@ -22,11 +22,11 @@ from sklearn import metrics
 
 # Data Preparation
 # Load and concatenate data
-df_train = pd.read_csv('C:/Users/realt/Documents/Binar/For Platinum Project/Data NusaX - Chapter 9/train.csv')
-df_valid = pd.read_csv('C:/Users/realt/Documents/Binar/For Platinum Project/Data NusaX - Chapter 9/valid.csv')
+df_train = pd.read_csv('train.csv')
+df_valid = pd.read_csv('valid.csv')
 
 df = pd.concat([df_train, df_valid], ignore_index=True)
-df_test = pd.read_csv('C:/Users/realt/Documents/Binar/For Platinum Project/Data NusaX - Chapter 9/test.csv')
+df_test = pd.read_csv('test.csv')
 
 df = pd.concat([df, df_test], ignore_index=True)
 
@@ -62,7 +62,7 @@ print("Total data: %s" % len(total_data))
 max_features = 100000
 tokenizer = Tokenizer(num_words=max_features, split=' ', lower=True)
 tokenizer.fit_on_texts(total_data)
-with open('C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/LSTM_files/lstm_tokenizer.pickle', 'wb') as handle:
+with open('lstm_tokenizer.pickle', 'wb') as handle:
     pickle.dump(tokenizer, handle, protocol=pickle.HIGHEST_PROTOCOL)
     print("lstm_tokenizer.pickle has been created!")
 
@@ -71,22 +71,22 @@ X = tokenizer.texts_to_sequences(total_data)
 vocab_size = len(tokenizer.word_index)
 maxlen = max(len(x) for x in X)
 X = pad_sequences(X)
-with open('C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/LSTM_files/lstm_x_pad_sequences.pickle', 'wb') as handle:
+with open('lstm_x_pad_sequences.pickle', 'wb') as handle:
     pickle.dump(X, handle, protocol=pickle.HIGHEST_PROTOCOL)
     print("lstm_x_pad_sequences.pickle has been created!")
 
 # Input data labels
 Y = pd.get_dummies(labels)
 Y = Y.values
-with open('C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/LSTM_files/lstm_y_labels.pickle', 'wb') as handle:
+with open('lstm_y_labels.pickle', 'wb') as handle:
     pickle.dump(Y, handle, protocol=pickle.HIGHEST_PROTOCOL)
     print("lstm_y_labels.pickle has created!")
 
 # Data Splitting
-file = open("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/LSTM_files/lstm_x_pad_sequences.pickle",'rb')
+file = open("lstm_x_pad_sequences.pickle",'rb')
 X = pickle.load(file)
 file.close()
-file = open("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/LSTM_files/lstm_y_labels.pickle",'rb')
+file = open("lstm_y_labels.pickle",'rb')
 Y = pickle.load(file)
 file.close()
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=1)
@@ -114,7 +114,7 @@ model.compile(loss='categorical_crossentropy', optimizer=adam, metrics=['accurac
 # Early stopping to prevent overfitting
 es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=10)
 history = model.fit(X_train, y_train, epochs=10, batch_size=batch_size, validation_data=(X_test, y_test), verbose=1, callbacks=[es])
-model.save("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/LSTM_files/my_lstm_model.keras")
+model.save("my_lstm_model.keras")
 
 # Model Evaluation
 predictions = model.predict(X_test)
@@ -189,7 +189,7 @@ def plot_history(history):
 
 # Save the model
 plot_history(history)
-model.save('C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/LSTM_files/model_lstm.h5')
+model.save('model_lstm.h5')
 print("Model has been created!")
 
 # Text Sentiment Prediction
@@ -203,7 +203,7 @@ text = [cleansing(input_text)]
 predicted = tokenizer.texts_to_sequences(text)
 guess = pad_sequences(predicted, maxlen=X.shape[1])
 
-model = load_model('C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/LSTM_files/model_lstm.h5')
+model = load_model('model_lstm.h5')
 prediction = model.predict(guess)
 threshold = 0.5
 polarity = np.argmax(prediction[0])
