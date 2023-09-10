@@ -3,10 +3,10 @@ tags:
 post:
   description: Perform Sentiment Analysis using RNN with File Upload
 parameters:
-  - name: text
+  - name: file
     in: formData
     required: true
-    type: string
+    type: file
 responses:
   '200':
     description: Successful Response

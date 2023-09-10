@@ -92,17 +92,17 @@ file.close()
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=1)
 
 # Model Preparation
-embed_dim = 90 # 100 going on 90
-units = 38 # 30 / 40 lean 40 going to 38
-dropout_rate = 0.5 # lean on 0.45 going to 0.5
-learning_rate = 0.060  # lean on 0.060
-batch_size = 14 # 14 / 16 previously 16
-# standard test : 0.784
+embed_dim = 90 # 90
+units = 38 # 38
+dropout_rate = 0.5 # 0.5
+learning_rate = 0.060  # 0.060 going on 0.080
+batch_size = 14 # 14
+# standard test : 0.792
 
 # Create the LSTM model
 model = Sequential()
 model.add(Embedding(max_features, embed_dim, input_length=X.shape[1]))
-model.add(LSTM(units, dropout=dropout_rate, kernel_regularizer=l2(0.0001)))
+model.add(LSTM(units, dropout=dropout_rate, kernel_regularizer=l2(0.001)))
 model.add(Dense(3, activation='softmax'))
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 print(model.summary())
@@ -112,7 +112,7 @@ adam = optimizers.Adam(learning_rate=learning_rate)
 model.compile(loss='categorical_crossentropy', optimizer=adam, metrics=['accuracy'])
 
 # Early stopping to prevent overfitting
-es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=5)
+es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=10)
 history = model.fit(X_train, y_train, epochs=10, batch_size=batch_size, validation_data=(X_test, y_test), verbose=1, callbacks=[es])
 model.save("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/LSTM_files/my_lstm_model.keras")
 
@@ -194,7 +194,7 @@ print("Model has been created!")
 
 # Text Sentiment Prediction
 input_text = """
-Saya rasa bahagia.
+Saya tidak suka dengan produk ini.
 """
 
 sentiment = ['negative', 'neutral', 'positive']

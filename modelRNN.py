@@ -93,9 +93,9 @@ X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_
 
 # adjustments
 embed_dim = 100 # 100
-units = 16 # 40
+units = 18 # 16 going to 20
 dropout_rate = 0.8 # 0.7 maybe go up
-learning_rate = 0.01 # 0.60 
+learning_rate = 0.06 # 0.60 
 batch_size = 30 # 30
 # standard test : 0.688
 
