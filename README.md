@@ -2,7 +2,7 @@
 An LSTM-and-RNN-based sentiment analysis API
 
 This repo will contain:
-- the flask app .py
+- the flask app .py and .ymls
 - .py files for the LSTM and RNN models
 - .csv files used for training
 - neural network calculations report
