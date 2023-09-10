@@ -14,8 +14,7 @@ swagger_template = dict(
         'title': "API Documentation for Deep Learning",
         'version': "1.0.0",
         'description': "Neural Network and LSTM"
-    },
-    host = request.host
+    }
 )
 
 swagger_config = {
@@ -45,12 +44,12 @@ def cleansing(sent):
     string = re.sub(r'[^a-zA-Z0-9]', ' ', string)
     return string
 
-file = open("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/LSTM_files/x_pad_sequences.pickle", "rb")
+file = open("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/LSTM_files/lstm_x_pad_sequences.pickle", "rb")
 feature_file_from_lstm = pickle.load(file)
 file.close()
 model_file_from_lstm = load_model("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/LSTM_files/model_lstm.h5")
 
-file = open("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/RNN_files/x_pad_sequences.pickle", "rb")
+file = open("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/RNN_files/rnn_x_pad_sequences.pickle", "rb")
 feature_file_from_rnn = pickle.load(file)
 file.close()
 model_file_from_rnn = load_model("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/RNN_files/model_rnn.h5")
@@ -77,8 +76,8 @@ def lstm():
     response_data = jsonify(json_response)
     return response_data
 
-# lstm file input (change .yml)
-@swag_from("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/lstm.yml", methods=['POST'])
+# lstm file input
+@swag_from("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/lstmfile.yml", methods=['POST'])
 @app.route('/lstmfile', methods=['POST'])
 def lstmfile():
     file = request.files.get('file')
@@ -125,7 +124,7 @@ def rnn():
     return response_data
 
 # rnn file input
-@swag_from("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/rnn.yml", methods=['POST'])
+@swag_from("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/rnnfile.yml", methods=['POST'])
 @app.route('/rnnfile', methods=['POST'])
 def rnnfile():
     file = request.files.get('file')
