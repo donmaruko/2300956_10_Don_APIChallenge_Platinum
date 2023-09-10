@@ -1,0 +1,9 @@
+tags:
+  - name: Sentiment Analysis Database
+post:
+  description: Clear the contents of the database
+responses:
+  '200':
+    description: Database cleared successfully
+  '500':
+    description: Internal Server Error

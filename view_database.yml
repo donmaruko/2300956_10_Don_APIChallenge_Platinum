@@ -1,0 +1,19 @@
+tags:
+  - name: Sentiment Analysis Database
+description: Cleansed text and its sentiment
+responses:
+  '200':
+    description: Successful Response
+    content:
+      application/json:
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              text:
+                type: string
+              get_sentiment:
+                type: string
+  '500':
+    description: Internal Server Error
