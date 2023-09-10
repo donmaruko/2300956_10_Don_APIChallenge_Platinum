@@ -10,7 +10,7 @@ from keras.models import load_model
 app = Flask(__name__)
 app.json_encoder = LazyJSONEncoder
 
-DATABASE = 'C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/data.db'
+DATABASE = 'data.db'
 
 def create_table():
     conn = sqlite3.connect(DATABASE)
@@ -62,21 +62,21 @@ def cleansing(sent):
     string = re.sub(r'[^a-zA-Z0-9]', ' ', string)
     return string
 
-file = open("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/LSTM_files/lstm_x_pad_sequences.pickle", "rb")
+file = open("lstm_x_pad_sequences.pickle", "rb")
 feature_file_from_lstm = pickle.load(file)
 file.close()
-model_file_from_lstm = load_model("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/LSTM_files/model_lstm.h5")
+model_file_from_lstm = load_model("model_lstm.h5")
 
-file = open("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/RNN_files/rnn_x_pad_sequences.pickle", "rb")
+file = open("rnn_x_pad_sequences.pickle", "rb")
 feature_file_from_rnn = pickle.load(file)
 file.close()
-model_file_from_rnn = load_model("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/RNN_files/model_rnn.h5")
+model_file_from_rnn = load_model("model_rnn.h5")
 
-count_vect = pickle.load(open("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/NN_files/feature.p", "rb"))
-model = pickle.load(open("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/NN_files/model.p", "rb"))
+count_vect = pickle.load(open("feature.p", "rb"))
+model = pickle.load(open("model.p", "rb"))
 
 # lstm text input
-@swag_from("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/lstm.yml", methods=['POST'])
+@swag_from("lstm.yml", methods=['POST'])
 @app.route('/lstm', methods=['POST'])
 def lstm():
     try:
@@ -110,7 +110,7 @@ def lstm():
         return response_data, 500
 
 # lstm file input
-@swag_from("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/lstmfile.yml", methods=['POST'])
+@swag_from("lstmfile.yml", methods=['POST'])
 @app.route('/lstmfile', methods=['POST'])
 def lstmfile():
     try:
@@ -147,7 +147,7 @@ def lstmfile():
         return response_data, 500
 
 # rnn text input
-@swag_from("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/rnn.yml", methods=['POST'])
+@swag_from("rnn.yml", methods=['POST'])
 @app.route('/rnn', methods=['POST'])
 def rnn():
     try:
@@ -181,7 +181,7 @@ def rnn():
         return response_data, 500
     
 # rnn file input
-@swag_from("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/rnnfile.yml", methods=['POST'])
+@swag_from("rnnfile.yml", methods=['POST'])
 @app.route('/rnnfile', methods=['POST'])
 def rnnfile():
     try:
@@ -217,7 +217,7 @@ def rnnfile():
         response_data = jsonify(error_response)
         return response_data, 500
 
-@swag_from('C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/nn.yml', methods=['POST'])
+@swag_from('nn.yml', methods=['POST'])
 @app.route('/nn', methods=['POST'])
 def nn():
     try:
@@ -255,7 +255,7 @@ def nn():
         response_data = jsonify(error_response)
         return response_data, 500
 
-@swag_from('C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/nnfile.yml', methods=['POST'])
+@swag_from('nnfile.yml', methods=['POST'])
 @app.route('/nnfile', methods=['POST'])
 def nnfile():
     try:
@@ -290,7 +290,7 @@ def nnfile():
         response_data = jsonify(error_response)
         return response_data, 500
 
-@swag_from('C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/view_database.yml', methods=['GET'])
+@swag_from('view_database.yml', methods=['GET'])
 @app.route('/view_database', methods=['GET'])
 def view_database():
     conn = sqlite3.connect(DATABASE)
@@ -302,7 +302,7 @@ def view_database():
     database_data = [{'text': row[0], 'sentiment': row[1]} for row in data]
     return jsonify({'data': database_data})
 
-@swag_from('C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/clear_database.yml', methods=['POST'])
+@swag_from('clear_database.yml', methods=['POST'])
 @app.route('/clear_database', methods=['POST'])
 def clear_database():
     conn = sqlite3.connect(DATABASE)
