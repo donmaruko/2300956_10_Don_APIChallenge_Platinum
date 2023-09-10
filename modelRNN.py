@@ -62,31 +62,31 @@ print("Total data: %s" % len(total_data))
 max_features = 100000
 tokenizer = Tokenizer(num_words=max_features, split=' ', lower=True)
 tokenizer.fit_on_texts(total_data)
-with open('C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/RNN_files/tokenizer.pickle', 'wb') as handle:
+with open('C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/RNN_files/rnn_tokenizer.pickle', 'wb') as handle:
     pickle.dump(tokenizer, handle, protocol=pickle.HIGHEST_PROTOCOL)
-    print("tokenizer.pickle has been created!")
+    print("rnn_tokenizer.pickle has been created!")
 
 # Tokenize text data
 X = tokenizer.texts_to_sequences(total_data)
 vocab_size = len(tokenizer.word_index)
 maxlen = max(len(x) for x in X)
 X = pad_sequences(X)
-with open('C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/RNN_files/x_pad_sequences.pickle', 'wb') as handle:
+with open('C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/RNN_files/rnn_x_pad_sequences.pickle', 'wb') as handle:
     pickle.dump(X, handle, protocol=pickle.HIGHEST_PROTOCOL)
-    print("x_pad_sequences.pickle has been created!")
+    print("rnn_x_pad_sequences.pickle has been created!")
 
 # Input data labels
 Y = pd.get_dummies(labels)
 Y = Y.values
-with open('C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/RNN_files/y_labels.pickle', 'wb') as handle:
+with open('C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/RNN_files/rnn_y_labels.pickle', 'wb') as handle:
     pickle.dump(Y, handle, protocol=pickle.HIGHEST_PROTOCOL)
-    print("y_labels.pickle has created!")
+    print("rnn_y_labels.pickle has created!")
 
 # Data Splitting
-file = open("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/RNN_files/x_pad_sequences.pickle",'rb')
+file = open("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/RNN_files/rnn_x_pad_sequences.pickle",'rb')
 X = pickle.load(file)
 file.close()
-file = open("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/RNN_files/y_labels.pickle",'rb')
+file = open("C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/RNN_files/rnn_y_labels.pickle",'rb')
 Y = pickle.load(file)
 file.close()
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=1)
@@ -191,7 +191,7 @@ model.save('C:/Users/realt/Documents/Python/PYTHON/Binar/Platinum/Chapter9/API/R
 print("Model has been created!")
 
 input_text = '''
-Rasa syukur, cukup.
+Saya rasa bahagia.
 '''
 sentiment = ['negative', 'neutral', 'positive']
 

@@ -1,7 +1,7 @@
 tags:
-  - name: Sentiment Analysis using LSTM
+  - name: Sentiment Analysis using RNN with File Upload
 post:
-  description: Text that will be processed
+  description: Perform Sentiment Analysis using RNN with File Upload
 parameters:
   - name: text
     in: formData

@@ -1,6 +1,6 @@
 tags:
   - name: Sentiment Analysis using RNN
-get:
+post:
   description: Text that will be processed
 parameters:
   - name: text
