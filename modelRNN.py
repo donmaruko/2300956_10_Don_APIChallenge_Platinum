@@ -93,11 +93,11 @@ X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_
 
 # adjustments
 embed_dim = 100 # 100
-units = 18 # 16 going to 20
-dropout_rate = 0.8 # 0.7 maybe go up
-learning_rate = 0.06 # 0.60 
+units = 16 # 16
+dropout_rate = 0.8 # 0.8
+learning_rate = 1.2 # 0.060 / 0.08
 batch_size = 30 # 30
-# standard test : 0.688
+# standard test : 0.701
 
 model = Sequential()
 model.add(Embedding(max_features, embed_dim, input_length=X.shape[1]))
