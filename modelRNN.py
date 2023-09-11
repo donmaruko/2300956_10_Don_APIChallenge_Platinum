@@ -97,7 +97,7 @@ units = 16 # 16
 dropout_rate = 0.8 # 0.8
 learning_rate = 1.2 # 0.060 / 0.08
 batch_size = 30 # 30
-# standard test : 0.701
+# standard test : 0.725
 
 model = Sequential()
 model.add(Embedding(max_features, embed_dim, input_length=X.shape[1]))
