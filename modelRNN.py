@@ -111,7 +111,7 @@ adam = optimizers.Adam(learning_rate = learning_rate)
 model.compile(loss = 'categorical_crossentropy', optimizer=adam, metrics = ['accuracy'])
 
 # epochs 10 default
-es = EarlyStopping(monitor='val_l oss', mode='min', verbose=1, patience=10)
+es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=10)
 history = model.fit(X_train, y_train, epochs=50, batch_size=batch_size, validation_data=(X_test, y_test), verbose=1, callbacks=[es])
 
 # evaluation with confusion matrix, accuracy, f1, recall, precision
