@@ -1,7 +1,7 @@
 tags:
   - name: Sentiment Analysis using LSTM
 post:
-  description: Text that will be processed
+  description: Perform Sentiment Analysis using LSTM
 parameters:
   - name: text
     in: formData

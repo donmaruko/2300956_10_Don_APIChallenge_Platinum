@@ -1,5 +1,5 @@
 tags:
-  - name: Sentiment Analysis using RNN with File Upload
+  - name: Sentiment Analysis using RNN
 post:
   description: Perform Sentiment Analysis using RNN with File Upload
 parameters:
