@@ -19,13 +19,34 @@ def create_table():
         CREATE TABLE IF NOT EXISTS sentiment_data (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             text TEXT,
-            sentiment TEXT
+            sentiment TEXT,
+            binary_data BLOB
         )
     ''')
     conn.commit()
     conn.close()
 
 create_table()
+
+def recreate_table():
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+    cursor.execute('''DROP TABLE IF EXISTS sentiment_data''')
+    cursor.execute('''
+        CREATE TABLE sentiment_data (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            text TEXT,
+            sentiment TEXT,
+            binary_data BLOB
+        )
+    ''')
+    conn.commit()
+    conn.close()
+
+'''
+recreate_table() call this only if the view_database endpoint breaks, 
+after that comment it again and recall the create_table() function to make a new table
+'''
 
 swagger_template = dict(
     info={
@@ -295,11 +316,13 @@ def nnfile():
 def view_database():
     conn = sqlite3.connect(DATABASE)
     cursor = conn.cursor()
-    cursor.execute("SELECT text, sentiment FROM sentiment_data")
+    cursor.execute("SELECT text, sentiment, binary_data FROM sentiment_data")
     data = cursor.fetchall()
     conn.close()
-    # convert data to list of dictionaries
     database_data = [{'text': row[0], 'sentiment': row[1]} for row in data]
+    for item in database_data:
+        if len(item) > 2:
+            item['binary_data'] = base64.b64encode(item[2]).decode('utf-8')
     return jsonify({'data': database_data})
 
 @swag_from('clear_database.yml', methods=['POST'])
@@ -311,6 +334,6 @@ def clear_database():
     conn.commit()
     conn.close()
     return jsonify({'message': 'Database cleared successfully'})
-
+    
 if __name__ == '__main__':
     app.run()
