@@ -239,7 +239,7 @@ def nn():
         # Prepare the response JSON
         json_response = {
             "status_code": 200,
-            "description": "Result of Sentiment Analysis using Neural Network",
+            "description": "Result of Sentiment Analysis using MLPClassifier",
             "data": {
                 "text": original_text,
                 "sentiment": get_sentiment
@@ -274,7 +274,7 @@ def nnfile():
         conn.close()
         json_response = {
                 "status_code": 200,
-                "description": "Result of Sentiment Analysis using Neural Network",
+                "description": "Result of Sentiment Analysis using MLPClassifier",
                 "data": {
                     "text": pretext,
                     "sentiment": get_sentiment
