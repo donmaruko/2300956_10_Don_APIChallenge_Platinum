@@ -1,7 +1,7 @@
 tags:
-  - name: Sentiment Analysis using Neural Network
+  - name: Sentiment Analysis using MLPClassifier
 post:
-  description: Perform Sentiment Analysis using NN
+  description: Perform Sentiment Analysis using Neural Network
 parameters:
   - name: text
     in: formData
