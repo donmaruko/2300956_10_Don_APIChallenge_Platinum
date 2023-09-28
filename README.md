@@ -1,4 +1,4 @@
-# 2300956_10_Don_APIChallenge_Platinum
+# Sentiment-Analysis-API
 
 An LSTM-and-RNN-based sentiment analysis API
 
