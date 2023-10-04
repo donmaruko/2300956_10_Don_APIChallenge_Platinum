@@ -23,7 +23,7 @@ This repo contains:
 1. Clone this repository to your local machine:
 
 ```shell
-git clone <https://github.com/donmaruko/Sentiment-Analysis-API.git>
+git clone https://github.com/donmaruko/Sentiment-Analysis-API.git
 ```
 
 2. Install the required Python packages by running the following command in your project directory:
