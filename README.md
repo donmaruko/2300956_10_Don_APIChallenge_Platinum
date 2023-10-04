@@ -16,7 +16,7 @@ This repo contains:
 - [Endpoints](#endpoints)
 - [Database](#database)
 - [Swagger Documentation](#swagger-documentation)
-- [License](#license)
+- [Contributing](#contributing)
 
 ## Installation
 
@@ -72,3 +72,7 @@ The API uses an SQLite database (`data.db`) to store the analyzed data. You can 
 ## Swagger Documentation
 
 Swagger is integrated to provide API documentation. You can access the Swagger UI by visiting `http://localhost:8000/docs/` in your web browser. The Swagger documentation provides detailed information about each API endpoint, including request and response examples.
+
+## Contributing
+
+Contributions are welcome! If you have any suggestions, bug reports, or feature requests, please create an issue or submit a pull request.
